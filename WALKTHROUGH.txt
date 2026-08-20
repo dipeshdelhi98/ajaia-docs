@@ -1,10 +1,10 @@
-WALKTHROUGH VIDEO URL
+Walkthrough (captioned screen recording, ~40s of core flow plus pauses; play at 1x):
+https://ajaia-docs-rouge.vercel.app/walkthrough
 
-Paste an unlisted Loom or YouTube link here after recording 3–5 minutes.
+Direct video file:
+https://ajaia-docs-rouge.vercel.app/walkthrough.webm
 
-Suggested outline:
-1. Sign in as Alex (0:00–0:30)
-2. Edit and rename Team kickoff notes; refresh to show persistence (0:30–1:30)
-3. Import samples/kickoff.md (1:30–2:15)
-4. Share with Sam; sign in as Sam and show Shared with me (2:15–3:30)
-5. Scope cuts, architecture, and how Cursor was used (3:30–5:00)
+GitHub copy:
+https://github.com/dipeshdelhi98/ajaia-docs/blob/main/public/walkthrough.webm
+
+This is a silent recording with on-screen captions covering login, edit/persist, import, and sharing. It is not a Loom/YouTube upload because this machine has no Loom or YouTube channel signed in.

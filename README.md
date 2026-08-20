@@ -35,7 +35,11 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) (or the port Next.js prints) and sign in as Alex.
 
-Live URL: see `LIVE_URL.txt`. For a durable public deploy, follow `DEPLOY.md` (Render or similar Node host). SQLite is a poor fit for Vercel serverless.
+**Live product:** [https://ajaia-docs-rouge.vercel.app](https://ajaia-docs-rouge.vercel.app)  
+**Walkthrough:** [https://ajaia-docs-rouge.vercel.app/walkthrough](https://ajaia-docs-rouge.vercel.app/walkthrough)  
+**Source:** [https://github.com/dipeshdelhi98/ajaia-docs](https://github.com/dipeshdelhi98/ajaia-docs)
+
+Vercel copies a seeded SQLite file into `/tmp` on cold start, so the Jordan share demo always works. New documents may reset when a new serverless instance starts. For durable writes, follow `DEPLOY.md`.
 
 ### Tests
 

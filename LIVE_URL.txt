@@ -1,9 +1,12 @@
-Local: http://localhost:3001 (or 3000 if that port is free)
+Live product: https://ajaia-docs-rouge.vercel.app
+Walkthrough video: https://ajaia-docs-rouge.vercel.app/walkthrough
+Source: https://github.com/dipeshdelhi98/ajaia-docs
 
-Temporary public tunnel (keep `npm run dev` running on this machine):
-https://legal-heads-pay.loca.lt
+Local: http://localhost:3001 (or 3000)
 
-If localtunnel shows an interstitial password page, enter this public IPv4:
-182.77.65.132
+Demo accounts (password demo1234):
+- alex@ajaia.dev
+- jordan@ajaia.dev
+- sam@ajaia.dev
 
-Stable hosting: follow DEPLOY.md (Render Web Service). Do not use Vercel serverless with this SQLite database.
+Note: Vercel copies a seeded SQLite file into /tmp on each cold start. Seeded sharing (Alex → Jordan) always works. Documents you create during a review session may reset when a new serverless instance starts. For durable writes, use DEPLOY.md (Render).

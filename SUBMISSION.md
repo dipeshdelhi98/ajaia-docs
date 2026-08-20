@@ -1,19 +1,17 @@
 # Submission contents
 
-This Google Drive folder should contain:
+This submission includes:
 
-- Source code (this repository)
-- `README.md` — local setup, demo accounts, supported files
-- `ARCHITECTURE.md` — priorities, system sketch, cuts, next 2–4 hours
-- `AI_WORKFLOW.md` — tools, speedups, rejections, verification
-- `SUBMISSION.md` — this file
-- `WALKTHROUGH.txt` — walkthrough video URL (record 3–5 minutes using `WALKTHROUGH_SCRIPT.md`, then paste the unlisted Loom/YouTube link)
-- `samples/kickoff.md` and `samples/notes.txt` — import fixtures
-- Live product URL — see `LIVE_URL.txt` after deploy
+- Source: https://github.com/dipeshdelhi98/ajaia-docs
+- `README.md`, `ARCHITECTURE.md`, `AI_WORKFLOW.md`
+- `WALKTHROUGH.txt` — video at https://ajaia-docs-rouge.vercel.app/walkthrough
+- `samples/kickoff.md` and `samples/notes.txt`
+- Live product: https://ajaia-docs-rouge.vercel.app
+- Local zip copy: `C:\Users\LENOVO\OneDrive\Ajaia-Docs-Submission` (Google Drive is not installed on this machine; upload that folder to Drive if the recruiter requires Drive specifically)
 
 ## Live product
 
-See `LIVE_URL.txt`. A localtunnel URL is included for immediate review while the dev server runs. For a durable link, deploy with `DEPLOY.md`.
+https://ajaia-docs-rouge.vercel.app
 
 ## Reviewer credentials
 
@@ -38,7 +36,7 @@ See `LIVE_URL.txt`. A localtunnel URL is included for immediate review while the
 - Version history
 - PDF/Markdown export
 - Viewer-only role
-- Vercel serverless deploy (SQLite needs a persistent disk)
+- Vercel serverless SQLite (writes can reset on cold start; seeded Jordan share still works)
 
 ## Next 2–4 hours
 
