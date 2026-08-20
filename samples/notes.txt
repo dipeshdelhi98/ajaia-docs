@@ -1,0 +1,7 @@
+Imported plain text notes
+=========================
+
+This file should become a new document with one paragraph per line.
+
+Second paragraph.
+Third paragraph.

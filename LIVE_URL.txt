@@ -1,0 +1,9 @@
+Local: http://localhost:3001 (or 3000 if that port is free)
+
+Temporary public tunnel (keep `npm run dev` running on this machine):
+https://legal-heads-pay.loca.lt
+
+If localtunnel shows an interstitial password page, enter this public IPv4:
+182.77.65.132
+
+Stable hosting: follow DEPLOY.md (Render Web Service). Do not use Vercel serverless with this SQLite database.
