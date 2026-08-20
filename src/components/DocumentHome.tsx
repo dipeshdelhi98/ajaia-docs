@@ -11,6 +11,7 @@ type DocItem = {
   title: string;
   updatedAt: string;
   kind: "owned" | "shared";
+  role?: string;
   owner: User;
   shareCount: number;
   attachmentCount: number;
@@ -173,14 +174,18 @@ function DocCard({ doc }: { doc: DocItem }) {
         <h3 className="font-medium leading-snug">{doc.title}</h3>
         <span
           className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] uppercase tracking-wide ${
-            doc.kind === "owned" ? "bg-[#e8f3ee] text-[#1f4b3a]" : "bg-[#f3eee4] text-[#6a4b1d]"
+            doc.kind === "owned"
+              ? "bg-[#e8f3ee] text-[#1f4b3a]"
+              : doc.role === "viewer"
+                ? "bg-[#eceaf3] text-[#3d3a6b]"
+                : "bg-[#f3eee4] text-[#6a4b1d]"
           }`}
         >
-          {doc.kind === "owned" ? "Owned" : "Shared"}
+          {doc.kind === "owned" ? "Owned" : doc.role === "viewer" ? "Viewer" : "Editor"}
         </span>
       </div>
       <p className="mt-2 text-sm text-[#6b6b66]">
-        {doc.kind === "shared" ? `Owner: ${doc.owner.name}` : `${doc.shareCount} shared`}
+        {doc.kind === "shared" ? `Owner: ${doc.owner.name} · ${doc.role === "viewer" ? "view only" : "can edit"}` : `${doc.shareCount} shared`}
         {doc.attachmentCount ? ` · ${doc.attachmentCount} file` : ""}
       </p>
       <p className="mt-1 text-xs text-[#8a8a84]">Updated {new Date(doc.updatedAt).toLocaleString()}</p>

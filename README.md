@@ -10,9 +10,9 @@ Password for every account: `demo1234`
 
 | Name | Email | Notes |
 | --- | --- | --- |
-| Alex Rivera | `alex@ajaia.dev` | Owns seeded docs, including one already shared with Jordan |
-| Jordan Chen | `jordan@ajaia.dev` | Sees **Team kickoff notes** under Shared with me |
-| Sam Okonkwo | `sam@ajaia.dev` | Use to demo inviting a third person |
+| Alex Rivera | `alex@ajaia.dev` | Owns seeded docs |
+| Jordan Chen | `jordan@ajaia.dev` | Editor on **Team kickoff notes** |
+| Sam Okonkwo | `sam@ajaia.dev` | Viewer on **Team kickoff notes** (read-only) |
 
 ## Supported file import
 
@@ -47,7 +47,7 @@ Vercel copies a seeded SQLite file into `/tmp` on cold start, so the Jordan shar
 npm test
 ```
 
-The automated test covers sharing access rules (owner vs shared vs denied).
+The automated test covers sharing access rules (owner vs editor vs viewer vs denied).
 
 ### Reset demo data
 
@@ -66,6 +66,6 @@ npm run db:reset
 1. Sign in as `alex@ajaia.dev`.
 2. Open **Team kickoff notes**, change formatting, rename the title, refresh — content should persist.
 3. Import `samples/kickoff.md`.
-4. Share a document with `sam@ajaia.dev`.
-5. Sign out, sign in as Sam, confirm it appears under **Shared with me**.
-6. Sign in as Jordan to see the pre-shared kickoff doc.
+4. Open Share: Jordan is an **editor**, Sam is a **viewer**. You can change roles.
+5. Sign in as Jordan — you can edit.
+6. Sign in as Sam — the editor is view-only.

@@ -32,7 +32,7 @@ export async function GET() {
 
     return NextResponse.json({
       owned: owned.map((doc) => serializeListItem(doc, "owned")),
-      shared: sharedRows.map((row) => serializeListItem(row.document, "shared")),
+      shared: sharedRows.map((row) => serializeListItem(row.document, "shared", row.role)),
     });
   } catch (error) {
     return jsonError(error);
@@ -69,6 +69,7 @@ function serializeListItem(
     _count: { shares: number; attachments: number };
   },
   kind: "owned" | "shared",
+  role?: string,
 ) {
   return {
     id: doc.id,
@@ -76,6 +77,7 @@ function serializeListItem(
     updatedAt: doc.updatedAt,
     createdAt: doc.createdAt,
     kind,
+    role: kind === "owned" ? "owner" : role ?? "editor",
     owner: doc.owner,
     shareCount: doc._count.shares,
     attachmentCount: doc._count.attachments,

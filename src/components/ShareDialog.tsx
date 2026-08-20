@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 
 type User = { id: string; email: string; name: string };
-type Share = { id: string; user: User };
+type Share = { id: string; role: string; user: User };
 
 export function ShareDialog({
   documentId,
@@ -17,6 +17,7 @@ export function ShareDialog({
   onChanged: () => void;
 }) {
   const [email, setEmail] = useState("jordan@ajaia.dev");
+  const [role, setRole] = useState<"editor" | "viewer">("editor");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -27,7 +28,7 @@ export function ShareDialog({
     const res = await fetch(`/api/documents/${documentId}/share`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email, role }),
     });
     const data = await res.json();
     setBusy(false);
@@ -36,6 +37,17 @@ export function ShareDialog({
       return;
     }
     setEmail("");
+    onChanged();
+  }
+
+  async function changeRole(userId: string, nextRole: "editor" | "viewer") {
+    setBusy(true);
+    await fetch(`/api/documents/${documentId}/share`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId, role: nextRole }),
+    });
+    setBusy(false);
     onChanged();
   }
 
@@ -60,7 +72,7 @@ export function ShareDialog({
           <div>
             <h2 className="text-lg font-semibold">Share document</h2>
             <p className="mt-1 text-sm text-[#6b6b66]">
-              Grant access to another seeded user. They will see it under Shared with me.
+              Editors can change the doc. Viewers can only read it.
             </p>
           </div>
           <button onClick={onClose} className="text-sm text-[#6b6b66]">
@@ -68,13 +80,21 @@ export function ShareDialog({
           </button>
         </div>
 
-        <form onSubmit={addShare} className="mt-4 flex gap-2">
+        <form onSubmit={addShare} className="mt-4 flex flex-col gap-2 sm:flex-row">
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="jordan@ajaia.dev"
             className="flex-1 rounded-lg border border-[#e7e5e0] px-3 py-2 text-sm outline-none focus:border-[#1f4b3a]"
           />
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value as "editor" | "viewer")}
+            className="rounded-lg border border-[#e7e5e0] px-2 py-2 text-sm"
+          >
+            <option value="editor">Editor</option>
+            <option value="viewer">Viewer</option>
+          </select>
           <button
             disabled={busy}
             className="rounded-lg bg-[#1f4b3a] px-3 py-2 text-sm text-white disabled:opacity-60"
@@ -89,14 +109,25 @@ export function ShareDialog({
             <li className="text-sm text-[#8a8a84]">No one else has access yet.</li>
           ) : (
             shares.map((share) => (
-              <li key={share.id} className="flex items-center justify-between rounded-lg border border-[#ece9e2] px-3 py-2 text-sm">
+              <li key={share.id} className="flex items-center justify-between gap-2 rounded-lg border border-[#ece9e2] px-3 py-2 text-sm">
                 <span>
                   {share.user.name}
                   <span className="block text-xs text-[#8a8a84]">{share.user.email}</span>
                 </span>
-                <button onClick={() => revoke(share.user.id)} className="text-xs text-red-700">
-                  Remove
-                </button>
+                <span className="flex items-center gap-2">
+                  <select
+                    value={share.role === "viewer" ? "viewer" : "editor"}
+                    disabled={busy}
+                    onChange={(e) => changeRole(share.user.id, e.target.value as "editor" | "viewer")}
+                    className="rounded border border-[#e7e5e0] px-1 py-1 text-xs"
+                  >
+                    <option value="editor">Editor</option>
+                    <option value="viewer">Viewer</option>
+                  </select>
+                  <button onClick={() => revoke(share.user.id)} className="text-xs text-red-700">
+                    Remove
+                  </button>
+                </span>
               </li>
             ))
           )}

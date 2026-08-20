@@ -15,7 +15,7 @@ export async function GET(_: Request, { params }: Params) {
     const access = decideAccess({
       userId: user.id,
       ownerId: document.ownerId,
-      sharedUserIds: document.shares.map((s) => s.userId),
+      shares: document.shares.map((s) => ({ userId: s.userId, role: s.role })),
     });
 
     return NextResponse.json({
@@ -28,8 +28,10 @@ export async function GET(_: Request, { params }: Params) {
       isOwner,
       canShare: canShare({ userId: user.id, ownerId: document.ownerId }),
       canEdit: access.canEdit,
+      role: access.reason,
       shares: document.shares.map((s) => ({
         id: s.id,
+        role: s.role,
         user: s.user,
       })),
       attachments: document.attachments,
@@ -47,7 +49,7 @@ export async function PATCH(request: Request, { params }: Params) {
     const access = decideAccess({
       userId: user.id,
       ownerId: document.ownerId,
-      sharedUserIds: document.shares.map((s) => s.userId),
+      shares: document.shares.map((s) => ({ userId: s.userId, role: s.role })),
     });
 
     if (!access.canEdit) {

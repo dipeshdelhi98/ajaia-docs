@@ -33,6 +33,7 @@ model DocumentShare {
   id         String   @id @default(cuid())
   documentId String
   userId     String
+  role       String   @default("editor")
   document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt  DateTime @default(now())

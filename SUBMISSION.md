@@ -25,7 +25,7 @@ https://ajaia-docs-rouge.vercel.app
 - Autosave and reopen after refresh
 - Import `.txt`, `.md`, `.docx` (≤ 4 MB) into a new document
 - Owner vs shared lists
-- Invite / revoke by seeded email
+- Invite / revoke by seeded email with **editor** or **viewer** roles
 - Seeded login
 - Access-rule unit tests
 
@@ -35,9 +35,8 @@ https://ajaia-docs-rouge.vercel.app
 - Comments / suggestions
 - Version history
 - PDF/Markdown export
-- Viewer-only role
-- Vercel serverless SQLite (writes can reset on cold start; seeded Jordan share still works)
+- Vercel serverless SQLite (writes can reset on cold start; seeded shares still work)
 
 ## Next 2–4 hours
 
-Presence, editor vs viewer, Postgres + blob storage, last-write conflict notice.
+Presence, Postgres + blob storage, last-write conflict notice.

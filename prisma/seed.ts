@@ -45,7 +45,7 @@ const welcomeDoc = {
               content: [
                 {
                   type: "text",
-                  text: "This document is owned by Alex and already shared with Jordan.",
+                  text: "This document is owned by Alex. Jordan is an editor; Sam is a viewer.",
                 },
               ],
             },
@@ -59,7 +59,7 @@ const welcomeDoc = {
               content: [
                 {
                   type: "text",
-                  text: "Sign in as Jordan to see it under Shared with me.",
+                  text: "Sign in as Jordan to edit, or as Sam to see view-only access.",
                 },
               ],
             },
@@ -88,7 +88,7 @@ async function main() {
     created.push(user);
   }
 
-  const [alex, jordan] = created;
+  const [alex, jordan, sam] = created;
 
   const shared = await prisma.document.create({
     data: {
@@ -99,7 +99,11 @@ async function main() {
   });
 
   await prisma.documentShare.create({
-    data: { documentId: shared.id, userId: jordan.id },
+    data: { documentId: shared.id, userId: jordan.id, role: "editor" },
+  });
+
+  await prisma.documentShare.create({
+    data: { documentId: shared.id, userId: sam.id, role: "viewer" },
   });
 
   await prisma.document.create({

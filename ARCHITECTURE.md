@@ -25,7 +25,7 @@ uploads/  (original imported files)
 
 Access rules live in `src/lib/access-rules.ts` so the same logic can be unit tested without spinning up HTTP.
 
-Shared users can edit. Owners still uniquely share and delete. That keeps collaboration demonstrable without building role matrices.
+Owners can share and delete. Shared people are either **editors** (can change content) or **viewers** (read-only). That is the one stretch beyond the core access model.
 
 ## Deliberate cuts
 
@@ -38,6 +38,5 @@ Shared users can edit. Owners still uniquely share and delete. That keeps collab
 ## If there were 2–4 more hours
 
 - Presence / last-edited-by
-- Viewer vs editor roles
-- Postgres + object storage so Vercel is viable
+- Postgres + object storage so Vercel writes persist
 - Conflict handling if two people save at once

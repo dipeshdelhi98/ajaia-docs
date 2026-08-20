@@ -8,7 +8,7 @@ import { RichEditor } from "./RichEditor";
 import { ShareDialog } from "./ShareDialog";
 
 type User = { id: string; email: string; name: string };
-type Share = { id: string; user: User };
+type Share = { id: string; role: string; user: User };
 type Attachment = { id: string; filename: string; size: number };
 
 type DocPayload = {
@@ -20,6 +20,7 @@ type DocPayload = {
   isOwner: boolean;
   canShare: boolean;
   canEdit: boolean;
+  role: "owner" | "editor" | "viewer";
   shares: Share[];
   attachments: Attachment[];
 };
@@ -114,10 +115,14 @@ export function EditorShell({ documentId, user }: { documentId: string; user: Us
           />
           <span
             className={`hidden sm:inline rounded-full px-2 py-0.5 text-[11px] uppercase tracking-wide ${
-              doc.isOwner ? "bg-[#e8f3ee] text-[#1f4b3a]" : "bg-[#f3eee4] text-[#6a4b1d]"
+              doc.isOwner
+                ? "bg-[#e8f3ee] text-[#1f4b3a]"
+                : doc.canEdit
+                  ? "bg-[#f3eee4] text-[#6a4b1d]"
+                  : "bg-[#eceaf3] text-[#3d3a6b]"
             }`}
           >
-            {doc.isOwner ? "Owner" : "Shared"}
+            {doc.isOwner ? "Owner" : doc.canEdit ? "Editor" : "Viewer"}
           </span>
           <span className="text-xs text-[#8a8a84]">
             {status === "saving" ? "Saving…" : status === "saved" ? "Saved" : "Error"}
@@ -140,6 +145,7 @@ export function EditorShell({ documentId, user }: { documentId: string; user: Us
 
       <div className="mx-auto max-w-3xl px-4 py-3 text-sm text-[#6b6b66]">
         Owner {doc.owner.name} · signed in as {user.name}
+        {!doc.canEdit ? " · View only" : ""}
         {doc.attachments.length ? ` · Source file: ${doc.attachments[0].filename}` : ""}
       </div>
 

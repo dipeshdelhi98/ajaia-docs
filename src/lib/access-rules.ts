@@ -1,26 +1,37 @@
+export type ShareRole = "editor" | "viewer";
+
 export type AccessDecision = {
   canView: boolean;
   canEdit: boolean;
-  reason: "owner" | "shared" | "denied";
+  reason: "owner" | "editor" | "viewer" | "denied";
 };
 
+export function parseShareRole(value: unknown): ShareRole | null {
+  if (value === "editor" || value === "viewer") return value;
+  return null;
+}
+
 /**
- * Pure access rules used by both the API and tests.
- * Owners can view and edit. Shared users can view (and currently also edit
- * so collaboration is usable); the product still distinguishes owned vs shared.
+ * Owners can view, edit, and share.
+ * Editors can view and edit.
+ * Viewers can only view.
  */
 export function decideAccess(params: {
   userId: string;
   ownerId: string;
-  sharedUserIds: string[];
+  shares: { userId: string; role: string }[];
 }): AccessDecision {
   if (params.userId === params.ownerId) {
     return { canView: true, canEdit: true, reason: "owner" };
   }
-  if (params.sharedUserIds.includes(params.userId)) {
-    return { canView: true, canEdit: true, reason: "shared" };
+  const share = params.shares.find((item) => item.userId === params.userId);
+  if (!share) {
+    return { canView: false, canEdit: false, reason: "denied" };
   }
-  return { canView: false, canEdit: false, reason: "denied" };
+  if (share.role === "viewer") {
+    return { canView: true, canEdit: false, reason: "viewer" };
+  }
+  return { canView: true, canEdit: true, reason: "editor" };
 }
 
 export function canShare(params: { userId: string; ownerId: string }) {
