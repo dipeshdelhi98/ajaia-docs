@@ -5,3 +5,17 @@ dist
 .env
 .env*.local
 .vercel
+*.db
+!prisma/seeded.db
+*.db-journal
+prisma/dev.db
+prisma/dev.db-journal
+uploads
+.DS_Store
+coverage
+vitest.config.ts.timestamp*
+cookies.txt
+tmp-login.json
+test-results
+playwright-report
+blob-report
