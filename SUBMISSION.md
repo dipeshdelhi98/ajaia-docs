@@ -1,42 +1,61 @@
-# Submission contents
+# Ajaia Docs — Assignment Submission
 
-This submission includes:
+**Candidate:** Dipesh Gaur  
+**Live product:** https://ajaia-docs-rouge.vercel.app  
+**Walkthrough video:** https://ajaia-docs-rouge.vercel.app/walkthrough  
+**Direct video file:** https://ajaia-docs-rouge.vercel.app/walkthrough.webm  
+**Source code:** https://github.com/dipeshdelhi98/ajaia-docs
 
-- Source: https://github.com/dipeshdelhi98/ajaia-docs
-- `README.md`, `ARCHITECTURE.md`, `AI_WORKFLOW.md`
-- `WALKTHROUGH.txt` — video at https://ajaia-docs-rouge.vercel.app/walkthrough
-- `samples/kickoff.md` and `samples/notes.txt`
-- Live product: https://ajaia-docs-rouge.vercel.app
-- Local zip copy: `C:\Users\LENOVO\OneDrive\Ajaia-Docs-Submission` (Google Drive is not installed on this machine; upload that folder to Drive if the recruiter requires Drive specifically)
+## Reviewer accounts
 
-## Live product
+Password for every account: `demo1234`
 
-https://ajaia-docs-rouge.vercel.app
+| Name | Email | Role on “Team kickoff notes” |
+| --- | --- | --- |
+| Alex Rivera | alex@ajaia.dev | Owner |
+| Jordan Chen | jordan@ajaia.dev | Editor (can edit) |
+| Sam Okonkwo | sam@ajaia.dev | Viewer (read-only) |
 
-## Reviewer credentials
+## What to click (2 minutes)
 
-- `alex@ajaia.dev` / `demo1234`
-- `jordan@ajaia.dev` / `demo1234`
-- `sam@ajaia.dev` / `demo1234`
+1. Open the live URL and sign in as Alex.
+2. Open **Team kickoff notes**, edit formatting, rename, refresh.
+3. Import `samples/kickoff.md` (.txt / .md / .docx, max 4 MB).
+4. Open Share — Jordan is Editor, Sam is Viewer.
+5. Sign in as Jordan (can edit), then Sam (view only).
+6. Watch the walkthrough if you want the same flow narrated on-screen: https://ajaia-docs-rouge.vercel.app/walkthrough
 
-## Working
+## What works
 
 - Create, rename, rich-text edit (bold, italic, underline, H1–H3, bullets, numbers)
 - Autosave and reopen after refresh
-- Import `.txt`, `.md`, `.docx` (≤ 4 MB) into a new document
+- Import .txt, .md, .docx into a new editable document
 - Owner vs shared lists
-- Invite / revoke by seeded email with **editor** or **viewer** roles
-- Seeded login
-- Access-rule unit tests
+- Invite / revoke, plus editor vs viewer roles (stretch)
+- SQLite persistence + seeded login
+- Automated tests for access rules
 
-## Incomplete / deprioritized
+## Intentionally incomplete
 
-- Real-time multiplayer cursors
+- Live cursors / real-time CRDT collaboration
 - Comments / suggestions
 - Version history
-- PDF/Markdown export
-- Vercel serverless SQLite (writes can reset on cold start; seeded shares still work)
+- PDF export
+- Vercel SQLite writes can reset on a new serverless instance; seeded shares still work. Local or Render is durable (`DEPLOY.md`).
 
-## Next 2–4 hours
+## Local run
 
-Presence, Postgres + blob storage, last-write conflict notice.
+```bash
+npm install
+npx prisma db push
+npm run db:seed
+npm run dev
+```
+
+Then open http://localhost:3000 (or the port Next prints).
+
+## Notes for reviewers
+
+Architecture: `ARCHITECTURE.md`  
+AI workflow: `AI_WORKFLOW.md`  
+This walkthrough is a silent captioned screen recording (not Loom/YouTube).
